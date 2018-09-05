@@ -3,3 +3,4 @@ npuzzle
 .swp
 .DS_STORE
 *.dSYM/
+generator.py
