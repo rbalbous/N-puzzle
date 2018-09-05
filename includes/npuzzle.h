@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/05 17:46:02 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/05 17:56:18 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ typedef struct s_board	t_board;
 
 struct		s_board
 {
-	int		test;
-}
+	int		*board;
+	int		*distances;
+	int		size;
+};
 
 #endif
