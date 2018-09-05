@@ -7,7 +7,7 @@ INCLUDES = includes
 
 OBJ_PATH = obj
 
-SRCS = parser.c
+SRCS = solver.c
 SRCS_PATH = srcs/n-puzzle
 SRCS_OBJ = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 

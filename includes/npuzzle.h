@@ -6,13 +6,14 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/05 20:33:06 by rbalbous         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:17:04 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NPUZZLE_H
  #define NPUZZLE_H
 
+ #include "ft_printf.h"
 typedef struct s_board	t_board;
 typedef struct s_point	t_point;
 
