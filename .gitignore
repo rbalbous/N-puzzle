@@ -1,0 +1,5 @@
+npuzzle
+*.[oa]
+.swp
+.DS_STORE
+*.dSYM/
