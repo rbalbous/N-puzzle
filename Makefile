@@ -1,11 +1,11 @@
 NAME = npuzzle
 
 CC = gcc
-
 FLAGS = -Wall -Wextra -Werror
-INLUDES = includes
 
-OBJ_PATH = OBJ_PATH
+INCLUDES = includes
+
+OBJ_PATH = obj
 
 SRCS = parser.c
 SRCS_PATH = srcs/n-puzzle
@@ -18,14 +18,15 @@ all:
 	@make $(LIB)
 	@make $(NAME)
 
-$(NAME) :	$(LIB) $(SRCS_OBJ)
+$(NAME) :	$(LIB) $(SRCS_OBJ) 
 			$(CC) -o $(NAME) $^ $(FLAGS)
 
 $(LIB)	:
 			make -j -C $(LIB_PATH)
 
-$(OBJ_PATH)/%.o :	$(SRCS_PATH)/%.c $(INCLUDES)/npuzzle.h
-					@mkdir -p $(OBJ_PATH)
+$(OBJ_PATH)/%.o: $(SRCS_PATH)/%.c $(INCLUDES)/npuzzle.h
+					mkdir -p $(OBJ_PATH)
+					$(CC) -o $@ -c $< -I $(INCLUDES) -I $(LIB_PATH)/includes $(FLAGS)
 
 norme:
 	@norminette srcs/**/*.c srcs/**/**/*.c includes | grep Error -B 1 > norm.out
