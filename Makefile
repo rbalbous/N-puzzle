@@ -10,7 +10,9 @@ OBJ_PATH = obj
 SRCS = parser.c \
 	main.c \
 	print.c \
-	solver.c
+	solver.c \
+	check.c \
+	ft_satoi.c
 SRCS_PATH = srcs/n-puzzle
 SRCS_OBJ = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
