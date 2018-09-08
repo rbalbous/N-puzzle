@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 20:30:42 by rbalbous          #+#    #+#             */
-/*   Updated: 2018/09/08 18:34:57 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:20:10 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,26 @@ void		get_sol(t_board *board, t_point point_i, t_point base, int curr)
 		base = (t_point){base.x + point_i.x, base.y + point_i.y};
 		curr = curr % (board->size * board->size);
 	}
+}
+
+void		swap_tpoint(t_queue *current, t_point swap1, t_point swap2)
+{
+	int		tmp;
+
+	tmp = current->board[swap1.x][swap1.y];
+	current->board[swap1.x][swap1.y] = current->board[swap2.x][swap2.y];
+	current->board[swap2.x][swap2.y] = tmp;
+}
+
+t_queue		*create_node(int size, t_queue *current, t_point swap1, t_point swap2)
+{
+	t_queue		*new;
+
+	new = ft_memalloc(sizeof(t_queue));
+	new->board = ft_memacpy(current->board, size * 32);
+	swap_tpoint(new, swap1, swap2);
+	new->dist = current->dist + 1;
+	new->zero = &((t_point){new->board[0][0], new->board[0][1]});
+	
+	return (new);
 }

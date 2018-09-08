@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:23:52 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:25:45 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ t_board	*parse_board(char *file)
 	if (ret < 0 || lines == 0 || lines < board->size - 1)
 		exit(ft_dprintf(2, "Error: rtrtrtrtrt\n"));
 	get_sol(board, (t_point){1, 0}, (t_point){0, 0}, 1);
-	print_board(board); // affichage
+	print_board(board->board, board->size); // affichage
 	return (board);
 }
