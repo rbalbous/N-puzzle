@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:57:05 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:58:21 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ struct		s_queue
 {
 	t_queue *next;
 	t_queue *prev;
-	t_point *zero;
-	int		**board;
+	t_point	*board;
 	int		dist;
 	int		eval;
 };
@@ -49,7 +48,7 @@ int			ft_satoi(char **str);
 int			is_comment(char *str);
 int			is_size(char *str);
 int			is_valid_line(char *str);
-t_queue		*create_node(int size, t_queue *current, t_point swap1, t_point swap2);
+t_queue		*create_node(int size, t_queue *current, int swap1, int swap2);
 int			is_solvable(t_point *start, t_point *sol, int size);
 
 #endif
