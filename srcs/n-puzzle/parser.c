@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:29:27 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 22:19:28 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	fill_board(t_board **board, char *str, int *lines)
 		if (!is_size(str) || (size = ft_atoi(str)) < 3)
 			exit(ft_dprintf(2, "Error: size\n"));
 		*board = init_board(*board, size);
-		ft_printf("init done -> %p\n", board);
+		// ft_printf("init done -> %p\n", board);
 		return ;
 	}
 	if (!is_valid_line(str))
@@ -77,6 +77,6 @@ t_board	*parse_board(char *file)
 	if (ret < 0 || lines == 0 || lines < board->size - 1)
 		exit(ft_dprintf(2, "Error: rtrtrtrtrt\n"));
 	get_sol(board, (t_point){1, 0}, (t_point){0, 0}, 1);
-	print_board(board->board, board->size); // affichage
+	// print_board(board->board, board->size); // affichage
 	return (board);
 }
