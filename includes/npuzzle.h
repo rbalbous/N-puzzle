@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:25:46 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:28:15 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct		s_point
 struct		s_board
 {
 	t_point *sol;
-	int		*board;
+	t_point	*board;
 	int		size;
 };
 
@@ -42,7 +42,7 @@ struct		s_queue
 	int		eval;
 };
 
-void		print_board(int **board, int size);
+void	print_board(t_point *board, int size);
 t_board		*parse_board(char *file);
 void		get_sol(t_board *board, t_point point_i, t_point base, int curr);
 int			ft_satoi(char **str);
