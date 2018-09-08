@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:28:15 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:57:05 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int			is_comment(char *str);
 int			is_size(char *str);
 int			is_valid_line(char *str);
 t_queue		*create_node(int size, t_queue *current, t_point swap1, t_point swap2);
+int			is_solvable(t_point *start, t_point *sol, int size);
 
 #endif

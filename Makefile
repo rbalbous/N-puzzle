@@ -12,7 +12,8 @@ SRCS = parser.c \
 	print.c \
 	solver.c \
 	check.c \
-	ft_satoi.c
+	ft_satoi.c \
+	solvability.c
 SRCS_PATH = srcs/n-puzzle
 SRCS_OBJ = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
