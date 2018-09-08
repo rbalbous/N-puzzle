@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   npuzzle.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:28:15 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:42:34 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ struct		s_queue
 {
 	t_queue *next;
 	t_queue *prev;
-	t_point *zero;
-	int		**board;
+	t_point	*board;
 	int		dist;
 	int		eval;
 };
@@ -49,6 +48,6 @@ int			ft_satoi(char **str);
 int			is_comment(char *str);
 int			is_size(char *str);
 int			is_valid_line(char *str);
-t_queue		*create_node(int size, t_queue *current, t_point swap1, t_point swap2);
+t_queue		*create_node(int size, t_queue *current, int swap1, int swap2);
 
 #endif
