@@ -6,11 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/09/08 16:18:50 by rbalbous         ###   ########.fr       */
-=======
-/*   Updated: 2018/09/08 16:26:20 by afoures          ###   ########.fr       */
->>>>>>> 6ca1a80342a1e954d037c23ebee8b149b13f9db8
+/*   Updated: 2018/09/08 19:29:12 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +89,6 @@ t_board	*parse_board(char *file)
 	if (ret < 0 || lines == 0 || lines < board->size - 1)
 		exit(ft_dprintf(2, "Error: rtrtrtrtrt\n"));
 	get_sol(board, (t_point){1, 0}, (t_point){0, 0}, 1);
-	print_board(board); // affichage
+	print_board(board->board, board->size); // affichage
 	return (board);
 }
