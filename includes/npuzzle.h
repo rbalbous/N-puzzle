@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 16:18:23 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:22:59 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ struct		s_point
 struct		s_board
 {
 	t_point *sol;
-	int		**board;
-	int		**distances;
+	int		*board;
 	int		size;
 };
 

@@ -6,7 +6,7 @@
 /*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 16:26:20 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 21:23:52 by afoures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,13 @@
 
 t_board	*init_board(t_board *board, int size)
 {
-	int i;
-
 	if (!(board = ft_memalloc(sizeof(t_board) + 1)))
 		return (NULL);
 	board->size = size;
 	if (!(board->sol = ft_memalloc(sizeof(t_point) * (size * size + 1))))
 		return (NULL);
-	i = -1;
-	if (!(board->board = ft_memalloc(sizeof(int *) * (size + 1))))
+	if (!(board->board = ft_memalloc(sizeof(t_point) * (size * size + 1))))
 		return (NULL);
-	if (!(board->distances = ft_memalloc(sizeof(int *) * (size + 1))))
-		return (NULL);
-	while (++i < size)
-	{
-		if (!(board->board[i] = ft_memalloc(sizeof(int) * (size + 1))))
-			return (NULL);
-		if (!(board->distances[i] = ft_memalloc(sizeof(int) * (size + 1))))
-			return (NULL);
-	}
 	return (board);
 }
 
@@ -57,7 +45,7 @@ void	fill_board(t_board **board, char *str, int *lines)
 	size = (*board)->size;
 	tmp = str;
 	while (++i < size && *tmp != '\0')
-		(*board)->board[*lines][i] = ft_satoi(&tmp);
+		(*board)->board[ft_satoi(&tmp)] = (t_point){i, *lines};
 	if (i < size)
 		exit(ft_dprintf(2, "Error: size2\n"));
 	*lines += 1;
