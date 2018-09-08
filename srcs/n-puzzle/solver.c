@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 20:30:42 by rbalbous          #+#    #+#             */
-/*   Updated: 2018/09/05 23:03:10 by rbalbous         ###   ########.fr       */
+/*   Updated: 2018/09/05 23:11:22 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,25 @@ void		get_sol(t_board *board, t_point point_i, t_point base, int curr)
 	}
 }
 
-int			main()
-{
-	t_board board;
-	board.sol = malloc(500);
-	board.size = 5;
-	int		index = 0;
-	while (index < 25)
-	{
-		board.sol[index].x = -2;
-		board.sol[index].y = -2;
-		index++;
-	}
-	get_sol(&board, (t_point){1, 0}, (t_point){0, 0}, 1);
-	index = 0;
-	while (index < 25)
-	{
-		ft_printf("(%d, ", board.sol[index].x);
-		ft_printf("%d)\n", board.sol[index].y);
-		index++;
-	}
-	return (0);
-}
-
+// int			main()
+// {
+// 	t_board board;
+// 	board.sol = malloc(500);
+// 	board.size = 5;
+// 	int		index = 0;
+// 	while (index < 25)
+// 	{
+// 		board.sol[index].x = -2;
+// 		board.sol[index].y = -2;
+// 		index++;
+// 	}
+// 	get_sol(&board, (t_point){1, 0}, (t_point){0, 0}, 1);
+// 	index = 0;
+// 	while (index < 25)
+// 	{
+// 		ft_printf("(%d, ", board.sol[index].x);
+// 		ft_printf("%d)\n", board.sol[index].y);
+// 		index++;
+// 	}
+// 	return (0);
+// }
