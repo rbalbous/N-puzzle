@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:20:09 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/05 23:14:48 by rbalbous         ###   ########.fr       */
+/*   Updated: 2018/09/08 16:18:50 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int		main(int ac, char *av[])
 {
 	if (ac > 1)
-		
+		parse_board(av[1]);
 	return (0);
 }
