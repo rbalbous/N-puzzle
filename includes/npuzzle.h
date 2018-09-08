@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   npuzzle.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 15:19:15 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/08 18:18:15 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct s_board	t_board;
 typedef struct s_point	t_point;
+typedef struct s_queue	t_queue;
 
 struct		s_point
 {
@@ -31,6 +32,12 @@ struct		s_board
 	int		**distances;
 	int		size;
 };
+
+struct		s_queue
+{
+	int		**board;
+	int		dist;
+}
 
 void	print_board(t_board *board);
 t_board	*parse_board(char *file);
