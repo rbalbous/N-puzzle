@@ -7,7 +7,10 @@ INCLUDES = includes
 
 OBJ_PATH = obj
 
-SRCS = solver.c
+SRCS = parser.c \
+	main.c \
+	print.c \
+	solver.c
 SRCS_PATH = srcs/n-puzzle
 SRCS_OBJ = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 
@@ -25,7 +28,7 @@ $(LIB)	:
 			make -j -C $(LIB_PATH)
 
 $(OBJ_PATH)/%.o: $(SRCS_PATH)/%.c $(INCLUDES)/npuzzle.h
-					mkdir -p $(OBJ_PATH)
+					@mkdir -p $(OBJ_PATH)
 					$(CC) -o $@ -c $< -I $(INCLUDES) -I $(LIB_PATH)/includes $(FLAGS)
 
 norme:
