@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   npuzzle.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 21:58:21 by afoures          ###   ########.fr       */
+/*   Updated: 2018/09/12 18:16:39 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int			is_size(char *str);
 int			is_valid_line(char *str);
 t_queue		*create_node(int size, t_queue *current, int swap1, int swap2);
 int			is_solvable(t_point *start, t_point *sol, int size);
+void		astar(t_board *board);
+void	print_maillon(t_queue *current, int size);
 
 #endif
