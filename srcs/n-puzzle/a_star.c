@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 19:31:33 by rbalbous          #+#    #+#             */
-/*   Updated: 2018/09/08 22:22:00 by rbalbous         ###   ########.fr       */
+/*   Updated: 2018/09/08 22:24:55 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void		astar(t_board *board)
 	{
 		while (open != NULL)
 		{
-		new = create_node(board->size, open, 0, 0);
-		add_open(open, new);
+			new = create_node(board->size, open, 0, 0);
+			add_open(open, new);
 		}
 	}
 }
