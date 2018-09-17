@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/12 18:16:39 by rbalbous         ###   ########.fr       */
+/*   Updated: 2018/09/17 18:03:18 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ t_queue		*create_node(int size, t_queue *current, int swap1, int swap2);
 int			is_solvable(t_point *start, t_point *sol, int size);
 void		astar(t_board *board);
 void	print_maillon(t_queue *current, int size);
+void	print_snail(t_board *board, int size);
+void	print_chain(t_queue *queue, int size);
 
 #endif

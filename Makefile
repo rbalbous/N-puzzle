@@ -1,7 +1,7 @@
 NAME = npuzzle
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 INCLUDES = includes
 
