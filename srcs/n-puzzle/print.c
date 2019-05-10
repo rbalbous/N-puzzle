@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:21:05 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/17 18:26:13 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:31:10 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_maillon(t_queue *current, int size)
 		ft_printf("\n");
 		i++;
 	}
-	ft_printf("DIST : | %d |\nEVAL : | %d |\nNEXT : | %p |\nPREV : | %p |\n", current->dist, current->eval, current->next, current->prev);
+	ft_printf("DIST : | %d |\nEVAL : | | %p |\nPREV : | %p |\n", current->dist, current->eval, current->prev);
 }
 
 void	print_board(t_point *board, int size)
@@ -75,8 +75,11 @@ void	print_snail(t_board *board, int size)
 		j = 0;
 		while (j < size)
 		{
-			ft_printf("%-5d|", tab[i][j]);
-			j++;
+			if (tab[i][j] == 0)
+				ft_printf("\033[31m%4d\033[m   |", tab[i][j]);
+			else
+				ft_printf("%4d   |", tab[i][j]);
+			j++;		
 		}
 		ft_printf("\n");
 		i++;
@@ -95,6 +98,6 @@ void	print_chain(t_queue *queue, int size)
 	{
 		print_maillon(queue, size);
 		ft_printf("-----------------------\n");
-		queue = queue->next;
+		queue = queue->prev;
 	}
 }

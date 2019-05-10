@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/17 18:03:18 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:19:19 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ struct		s_board
 
 struct		s_queue
 {
-	t_queue *next;
 	t_queue *prev;
 	t_point	*board;
+	t_point *prev_board;
 	int		dist;
 	int		eval;
 };
