@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 20:30:42 by rbalbous          #+#    #+#             */
-/*   Updated: 2018/09/12 17:38:09 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:23:47 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_queue		*create_node(int size, t_queue *current, int swap1, int swap2)
 	t_queue		*new;
 
 	new = ft_memalloc(sizeof(t_queue));
+	new->prev_board = ft_memacpy(current->board, size * size * sizeof(t_point));
 	new->board = ft_memacpy(current->board, size * size * sizeof(t_point));
 	swap_tpoint(new, swap1, swap2);
 	new->dist = current->dist + 1;
