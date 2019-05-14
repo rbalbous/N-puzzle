@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/05 21:20:09 by afoures           #+#    #+#             */
-/*   Updated: 2019/05/14 20:09:05 by rbalbous         ###   ########.fr       */
+/*   Created: 2019/05/14 20:21:15 by rbalbous          #+#    #+#             */
+/*   Updated: 2019/05/14 20:42:31 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-int		main(int ac, char *av[])
+void		free_queue(t_queue *queue)
 {
-	t_board		*board;
+	t_queue *tmp;
 
-	if (ac > 1)
+	while (queue != NULL)
 	{
-		board = parse_board(av[1]);
-		// print_coords(board->board, board->size);
-		// print_coords(board->sol, board->size);
-		if (!(is_solvable(board->board, board->sol, board->size)))
-		{
-			ft_printf("Unsolvable\n");
-			return (0);
-		}
-		astar(board);
+		tmp = queue->prev;
+		free(queue->board);
+		queue->prev = NULL;
+		queue = tmp;
 	}
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afoures <afoures@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-/*   Updated: 2018/09/08 22:19:28 by afoures          ###   ########.fr       */
+/*   Updated: 2019/05/14 18:53:38 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_board	*init_board(t_board *board, int size)
 	if (!(board = ft_memalloc(sizeof(t_board) + 1)))
 		return (NULL);
 	board->size = size;
+	board->cxty_open = 0;
+	board->cxty_closed = 0;
 	if (!(board->sol = ft_memalloc(sizeof(t_point) * (size * size + 1))))
 		return (NULL);
 	if (!(board->board = ft_memalloc(sizeof(t_point) * (size * size + 1))))
