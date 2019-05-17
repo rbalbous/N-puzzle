@@ -6,11 +6,50 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-/*   Updated: 2019/05/14 18:53:38 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/17 19:29:57 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
+
+t_flags		parse_args(char **av, int ac, t_flags *flags)
+{
+	int		i;
+	int		new_value;
+
+	i = 2;
+	new_value = 0;
+	while (i < ac)
+	{
+		if (av[i][0] != '-')
+			exit(ft_dprintf(2, "arg error : %s\n", av[i]));
+		if (av[i][1] == 's')
+			board->disp = 1;
+		else if (av[i][1] == 'u' && board->weight == 1)
+			board->weight = 0;
+		else if (av[i][1] == 'g' && board->greed == 1)
+			board->greed = 0;
+		else if (av[i][1] == 'w' && board->weight == 1)
+		{
+			if (i + 1 >= ac || av[i + 1][0] == '-')
+				board->weight = 2;
+			else
+			{
+				i++;
+				if ((new_value = ft_atoi(av[i])) <= 10 && new_value != 0)
+					board->weight = new_value;
+				else
+					exit(ft_dprintf(2, "error : weight > 10 : %s\n", av[i]));
+			}
+		}
+		if (!(ft_strcmp(av[i], "manhattan")))
+		{
+			flags->heuristic = 0;
+		}
+		i++;
+	}
+	return (flags);
+}
 
 t_board	*init_board(t_board *board, int size)
 {
@@ -19,6 +58,9 @@ t_board	*init_board(t_board *board, int size)
 	board->size = size;
 	board->cxty_open = 0;
 	board->cxty_closed = 0;
+	board->greed = 1;
+	board->weight = 1;
+	board->disp = 0;
 	if (!(board->sol = ft_memalloc(sizeof(t_point) * (size * size + 1))))
 		return (NULL);
 	if (!(board->board = ft_memalloc(sizeof(t_point) * (size * size + 1))))

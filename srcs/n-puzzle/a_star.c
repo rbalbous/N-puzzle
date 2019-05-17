@@ -6,26 +6,11 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 19:31:33 by rbalbous          #+#    #+#             */
-/*   Updated: 2019/05/14 20:02:39 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/17 19:15:39 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
-
-int			calc_eval(t_queue *current, t_board *board)
-{
-	int		tot;
-	int		index;
-
-	tot = 0;
-	index = 1;
-	while (index < board->size * board->size)
-	{
-		tot += abs(current->board[index].x - board->sol[index].x) + abs(current->board[index].y - board->sol[index].y);
-		index++;
-	}
-	return (tot);
-}
 
 int			check_closed(t_queue *closed, t_queue *current, int size)
 {
@@ -63,7 +48,7 @@ int			check_closed(t_queue *closed, t_queue *current, int size)
 	return (1);
 }
 
-t_queue		*add_open(t_queue *open, t_queue *new)
+t_queue		*add_open(t_queue *open, t_queue *new, int g, int w)
 {
 	t_queue *first;
 
@@ -74,19 +59,19 @@ t_queue		*add_open(t_queue *open, t_queue *new)
 		open = new;
 		return (open);
 	}
-	if ((new->dist + new->eval < open->dist + open->eval) || 
-	(new->dist + new->eval == open->dist + open->eval && new->eval < open->eval))
+	if ((new->dist * g + new->eval * w < open->dist * g + open->eval * w) || 
+	(new->dist * g + new->eval * w == open->dist * g + open->eval * w && new->eval * w < open->eval * w))
 	{
-		// ft_printf("tag add_open 2\n");
+		// ft_printf("tag add_open greed\n");
 		new->prev = open;
 		open = new;
 		return (open);
 	}
 	while (open->prev != NULL)
 	{
-		// ft_printf("tag add_open 3\n");
-		if ((new->dist + new->eval < open->dist + open->eval) || 
-		(new->dist + new->eval == open->dist + open->eval && new->eval < open->eval))
+		// ft_printf("tag add_open greed\n");
+		if ((new->dist * g + new->eval * w < open->dist * g + open->eval * w) || 
+		(new->dist * g + new->eval * w == open->dist * g + open->eval * w && new->eval * w < open->eval * w))
 		{
 			new->prev = open->prev;
 			open->prev = new;
@@ -136,9 +121,9 @@ t_queue		*add_nodes(t_board *board, t_queue *open, t_queue *current)
 				if (check_hashmap(board, new) == 1)
 				{
 					// ft_printf("tag add_nodes 2\n");
-					new->eval = calc_eval(new, board);
+					new->eval = eval_manhattan(new, board);
 					// ft_printf("tag add_nodes 3\n");
-					open = add_open(open, new);
+					open = add_open(open, new, board->greed, board->weight);
 					board->cxty_open++;
 					// ft_printf("tag add_nodes 4\n");
 					// print_chain(open, board->size);
@@ -159,12 +144,18 @@ void		astar(t_board *board)
 	t_queue *current;
 
 	sol = 0;
-	open = create_node(board->size, &((t_queue){0, board->board, NULL, -1, 0}), 0, 0);
+	open = create_node(board->size, &((t_queue){0, board->board, NULL, -1, 10000}), 0, 0);
 	closed = NULL;
+	int		eval_min = 1000000;
 	while (1)
 	{
 		current = open;
-		// print_node(current, board->size);
+		if (current->eval < eval_min)						//DEBUG
+		{
+			// eval_min = current->eval;
+			// ft_printf("eval_min :%d\n", eval_min);
+			// print_node(current, board->size);
+		}
 		if (open->prev != NULL)
 			open = open->prev;
 		else
@@ -189,10 +180,11 @@ void		astar(t_board *board)
 		}
 		// print_chain(open, board->size);
 		// ft_printf("-------------------------------------------\n");
-		// sleep(1);
+		// sleep(10);
 	}
 	// print_chain(open, board->size);
-	print_sol(closed, board->size, board);
+	if (board->disp == 1)
+		print_sol(closed, board->size, board);
 	// print_snail(board, board->size);
 	return ;
 }

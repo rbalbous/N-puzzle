@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2019/05/14 20:04:12 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/17 19:28:42 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_point		t_point;
 typedef struct s_queue		t_queue;
 typedef struct s_hash		t_hash;
 typedef struct s_hashlist	t_hashlist;
+typedef struct s_flags		t_flags;
 
 struct		s_point
 {
@@ -37,6 +38,14 @@ struct		s_board
 	int		cxty_open;
 	int		cxty_closed;
 	int		size;
+};
+
+struct		s_flags
+{
+	int		greed;
+	int		weight;
+	int		disp;
+	int		heuristic;
 };
 
 struct		s_queue
@@ -72,5 +81,9 @@ void		print_sol(t_queue *queue, int size, t_board *board);
 void		add_hashmap(t_board *board, t_queue *current);
 int			check_hashmap(t_board *board, t_queue *current);
 t_hashlist	*create_hashnode(t_board *board, t_queue *current);
+void		parse_args(char **av, int ac, t_board *board);
+int			eval_manhattan(t_queue *current, t_board *board);
+int			eval_missplaced(t_queue *current, t_board *board);
+int			eval_axes(t_queue *current, t_board *board);
 
 #endif
