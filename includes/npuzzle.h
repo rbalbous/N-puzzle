@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:14:02 by afoures           #+#    #+#             */
-/*   Updated: 2019/05/17 19:28:42 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:00:55 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_point		t_point;
 typedef struct s_queue		t_queue;
 typedef struct s_hash		t_hash;
 typedef struct s_hashlist	t_hashlist;
-typedef struct s_flags		t_flags;
+typedef struct s_flag		t_flag;
 
 struct		s_point
 {
@@ -40,12 +40,13 @@ struct		s_board
 	int		size;
 };
 
-struct		s_flags
+struct		s_flag
 {
 	int		greed;
 	int		weight;
 	int		disp;
 	int		heuristic;
+	int		(*h[3])();
 };
 
 struct		s_queue
@@ -63,7 +64,7 @@ struct		s_hashlist
 	t_point		*board;
 };
 
-void		print_board(t_point *board, int size);
+void		print_board(t_point *board, int size, int tot_size);
 t_board		*parse_board(char *file);
 void		get_sol(t_board *board, t_point point_i, t_point base, int curr);
 int			ft_satoi(char **str);
@@ -72,7 +73,8 @@ int			is_size(char *str);
 int			is_valid_line(char *str);
 t_queue		*create_node(int size, t_queue *current, int swap1, int swap2);
 int			is_solvable(t_point *start, t_point *sol, int size);
-void		astar(t_board *board);
+int			check_solved(t_board *board, t_queue *current);
+void		algo(t_board *board, t_flag *flag, int size);
 void		print_node(t_queue *current, int size);
 void		print_snail(t_board *board, int size);
 void		print_chain(t_queue *queue, int size);
@@ -81,9 +83,10 @@ void		print_sol(t_queue *queue, int size, t_board *board);
 void		add_hashmap(t_board *board, t_queue *current);
 int			check_hashmap(t_board *board, t_queue *current);
 t_hashlist	*create_hashnode(t_board *board, t_queue *current);
-void		parse_args(char **av, int ac, t_board *board);
-int			eval_manhattan(t_queue *current, t_board *board);
-int			eval_missplaced(t_queue *current, t_board *board);
-int			eval_axes(t_queue *current, t_board *board);
+void		parse_arg(char **av, int ac, t_flag *flag);
+int			eval_manhattan(t_queue *new, t_board *board);
+int			eval_missplaced(t_queue *new, t_board *board);
+int			eval_axes(t_queue *new, t_board *board);
+void		init_h(int (*h[3])());
 
 #endif

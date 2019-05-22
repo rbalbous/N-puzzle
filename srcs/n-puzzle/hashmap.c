@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:54:51 by rbalbous          #+#    #+#             */
-/*   Updated: 2019/05/17 18:09:23 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:05:35 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			cmp_board(t_queue *closed, t_hashlist *current, int size)
 {
 	int		i;
-	int 	ans;
+	int		ans;
 
 	while (closed != NULL)
 	{
@@ -23,7 +23,8 @@ int			cmp_board(t_queue *closed, t_hashlist *current, int size)
 		ans = 0;
 		while (i < size * size)
 		{
-			if (current->board[i].x != closed->board[i].x || current->board[i].y != closed->board[i].y)
+			if (current->board[i].x != closed->board[i].x ||
+			current->board[i].y != closed->board[i].y)
 			{
 				ans = 1;
 				break ;
@@ -31,24 +32,20 @@ int			cmp_board(t_queue *closed, t_hashlist *current, int size)
 			i++;
 		}
 		if (ans == 0)
-		{
 			return (0);
-		}
 		closed = closed->prev;
 	}
 	return (1);
 }
 
-int			create_key(t_point *board, int size)
+int			create_key(t_point *board, int size, int count)
 {
-	int		count;
 	int		index;
 	int		i;
 	int		j;
 	int		tab[size][size];
 
-	count = 0;
-	i = 0;	
+	i = 0;
 	index = 0;
 	while (index < size * size)
 	{
@@ -58,9 +55,9 @@ int			create_key(t_point *board, int size)
 	while (i < size)
 	{
 		j = 0;
-		while(j < size)
+		while (j < size)
 		{
-			count += tab[i][j] * (i * size + j + 1); 
+			count += tab[i][j] * (i * size + j + 1);
 			count %= HASH_LENGTH;
 			j++;
 		}
@@ -75,7 +72,8 @@ t_hashlist	*create_hashnode(t_board *board, t_queue *current)
 
 	if (!(new = ft_memalloc(sizeof(t_hashlist))))
 		exit(ft_dprintf(2, "malloc error\n"));
-	if (!(new->board = ft_memacpy(current->board, board->size * board->size * sizeof(t_point))))
+	if (!(new->board = ft_memacpy(current->board,
+	board->size * board->size * sizeof(t_point))))
 		exit(ft_dprintf(2, "malloc error\n"));
 	return (new);
 }
@@ -85,7 +83,7 @@ int			check_hashmap(t_board *board, t_queue *current)
 	int			key;
 	t_hashlist	*tmp;
 
-	key = create_key(current->board, board->size);
+	key = create_key(current->board, board->size, 0);
 	tmp = board->hash_tab[key];
 	if (!(board->hash_tab[key]))
 		return (1);
@@ -103,10 +101,10 @@ int			check_hashmap(t_board *board, t_queue *current)
 
 void		add_hashmap(t_board *board, t_queue *current)
 {
-	int		key;
-	t_hashlist *new;
+	int			key;
+	t_hashlist	*new;
 
-	key = create_key(current->board, board->size);
+	key = create_key(current->board, board->size, 0);
 	new = create_hashnode(board, current);
 	if (board->hash_tab[key])
 		new->next = board->hash_tab[key];

@@ -14,7 +14,7 @@ SRCS = parser.c \
 	check.c \
 	ft_satoi.c \
 	solvability.c \
-	a_star.c \
+	algo.c \
 	hashmap.c \
 	heuristics.c
 SRCS_PATH = srcs/n-puzzle
