@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/08 19:31:33 by rbalbous          #+#    #+#             */
-/*   Updated: 2019/05/22 18:02:35 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/23 18:41:07 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ t_queue		*add_nodes(t_board *board, t_queue *open, t_queue *current,
 		if (check_s(cbx, cby, current->board[index].x, current->board[index].y))
 		{
 			new = create_node(board->size, current, 0, index);
-			if (check_hashmap(board, new) == 1)
+			if (check_hashmap(board, new) != 1)
+				free_node(new);
+			else
 			{
 				new->eval = flag->h[flag->heuristic](new, board);
 				open = add_open(open, new, flag->greed, flag->weight);
@@ -118,20 +120,18 @@ void		algo(t_board *board, t_flag *flag, int size)
 	while (1)
 	{
 		current = open;
-		if (open->prev != NULL)
-			open = open->prev;
-		else
-			open = NULL;
 		board->cxty_open--;
 		if (!(check_solved(board, current)))
 			break ;
+		open = open->prev;
 		open = add_nodes(board, open, current, flag);
 		current->prev = closed;
 		closed = current;
 		add_hashmap(board, closed);
 		board->cxty_closed++;
 	}
-	if (flag->disp == 1)
-		print_sol(closed, size, board);
+	print_sol(closed, size, board, flag->disp);
+	free_queue(open);
+	free_queue(closed);
 	return ;
 }

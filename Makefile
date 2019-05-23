@@ -1,7 +1,7 @@
 NAME = npuzzle
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -Ofast
 
 INCLUDES = includes
 
@@ -16,7 +16,9 @@ SRCS = parser.c \
 	solvability.c \
 	algo.c \
 	hashmap.c \
-	heuristics.c
+	heuristics.c \
+	free.c
+
 SRCS_PATH = srcs/n-puzzle
 SRCS_OBJ = $(addprefix $(OBJ_PATH)/, $(SRCS:.c=.o))
 

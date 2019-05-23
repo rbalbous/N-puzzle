@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 17:13:30 by afoures           #+#    #+#             */
-/*   Updated: 2019/05/22 17:47:36 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/23 18:39:58 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		parse_flags(char **av, int ac, t_flag *flag, int i)
 	int		new_value;
 
 	new_value = 0;
-	init_h(flag->h);
 	if (av[i][1] == 's')
 		flag->disp = 1;
 	else if (av[i][1] == 'u' && flag->weight == 1)
@@ -34,9 +33,11 @@ int		parse_flags(char **av, int ac, t_flag *flag, int i)
 			if ((new_value = ft_atoi(av[i])) <= 10 && new_value != 0)
 				flag->weight = new_value;
 			else
-				exit(ft_dprintf(2, "error : weight > 10 : %s\n", av[i]));
+				disp_usage();
 		}
 	}
+	else
+		disp_usage();
 	return (i);
 }
 
@@ -48,7 +49,7 @@ void	parse_arg(char **av, int ac, t_flag *flag)
 	while (i < ac)
 	{
 		if (av[i][0] != '-')
-			exit(ft_dprintf(2, "arg error : %s\n", av[i]));
+			disp_usage();
 		i = parse_flags(av, ac, flag, i);
 		if (av[i][1] == '-')
 		{
@@ -59,7 +60,7 @@ void	parse_arg(char **av, int ac, t_flag *flag)
 			else if (!(ft_strcmp(av[i], "--axes")))
 				flag->heuristic = 2;
 			else
-				exit(ft_dprintf(2, "arg error : %s\n", av[i]));
+				disp_usage();
 		}
 		i++;
 	}
@@ -88,7 +89,7 @@ void	fill_board(t_board **board, char *str, int *lines)
 	size = 0;
 	if (*board == NULL)
 	{
-		if (!is_size(str) || (size = ft_atoi(str)) < 3)
+		if (!is_size(str) || (size = ft_atoi(str)) < 3 || size > 10)
 			exit(ft_dprintf(2, "Error: size\n"));
 		*board = init_board(*board, size);
 		return ;
@@ -105,16 +106,12 @@ void	fill_board(t_board **board, char *str, int *lines)
 	*lines += 1;
 }
 
-t_board	*parse_board(char *file)
+t_board	*parse_board(char *file, t_board *board, int lines)
 {
 	char	*str;
 	int		fd;
 	int		ret;
-	t_board	*board;
-	int		lines;
 
-	board = NULL;
-	lines = 0;
 	if ((fd = open(file, O_RDONLY)) <= 2)
 		exit(ft_dprintf(2, "Error: %s can't be opened\n", file));
 	while ((ret = get_next_line(fd, &str)) > 0)
@@ -127,6 +124,8 @@ t_board	*parse_board(char *file)
 			continue ;
 		else
 			fill_board(&board, str, &lines);
+		if (str != NULL)
+			free(str);
 	}
 	if (ret < 0 || lines == 0 || lines < board->size - 1)
 		exit(ft_dprintf(2, "Error: rtrtrtrtrt\n"));

@@ -6,7 +6,7 @@
 /*   By: rbalbous <rbalbous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 21:21:05 by afoures           #+#    #+#             */
-/*   Updated: 2019/05/22 17:10:53 by rbalbous         ###   ########.fr       */
+/*   Updated: 2019/05/23 18:29:43 by rbalbous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,26 @@ void	print_chain(t_queue *queue, int size)
 	}
 }
 
-void	print_sol(t_queue *queue, int size, t_board *board)
+void	print_sol(t_queue *queue, int size, t_board *board, int disp)
 {
 	int		tot_size;
 	int		dist;
 
 	dist = queue->dist + 1;
-	ft_printf("MOVE [%d]\n", dist);
-	print_board(board->sol, size, size * size);
-	ft_printf("\n");
-	while (queue->parent != NULL)
+	if (disp == 1)
 	{
-		ft_printf("MOVE [%d]\n", queue->dist);
-		print_board(queue->board, size, size * size);
+		ft_printf("MOVE [%d]\n", dist);
+		print_board(board->sol, size, size * size);
 		ft_printf("\n");
-		queue = queue->parent;
+		while (queue->parent != NULL)
+		{
+			ft_printf("MOVE [%d]\n", queue->dist);
+			print_board(queue->board, size, size * size);
+			ft_printf("\n");
+			queue = queue->parent;
+		}
 	}
 	tot_size = board->cxty_closed + board->cxty_open;
-	ft_printf("DIST : \t\t%d\nOPEN SIZE :\t%'d\nCLOSED SIZE :\t%'d\nTOT :\t\t%'d\n", dist, board->cxty_open, board->cxty_closed, tot_size);
+	ft_printf("DIST : \t\t%d\nOPEN :\t\t%'d\n", dist, board->cxty_open);
+	ft_printf("CLOSED :\t%'d\nTOT :\t\t%'d\n", board->cxty_closed, tot_size);
 }
